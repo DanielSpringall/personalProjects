@@ -3,26 +3,19 @@ blendshapeConnectionToggle is used to disconnect then re-connect incoming connec
 in bypassing the issue of editing a shape in a combination target. Because the connection on the blendshape node is
 stored as a string, this also allows for quickly swapping a driver for a target by disconnecting the connections,
 renaming the target, and then re connecting any connections
-
 To run:
 import blendshapeConnectionToggle; blendshapeConnectionToggle.ToggleBlendShapeConnection_UI()
-
 -------------------------
-
 MIT License
-
 Copyright (c) 2018 Daniel Springall
-
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
-
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
-
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -41,8 +34,6 @@ class ToggleBlendShapeConnection_UI:
             cmds.deleteUI("blendShapeConnectionToggle_UI")
         self.window = cmds.window("blendShapeConnectionToggle_UI", t="bsConnection Toggle", sizeable=False,
                                   wh=(300, 155))
-        # TODO: Remove
-        cmds.window(self.window, e=True, wh=(300, 155))
 
         # Get scene data
         self.parentNode = "blendShapeConnection_data"
@@ -157,7 +148,7 @@ class ToggleBlendShapeConnection_UI:
     # Scene actions
     def disconnectBlendShapeConnections(self, *args, **kwargs):
         blendShape = self.getBlendShapeNodeFromOptionMenu()
-        if not blendShape:
+        if not blendShape or blendShape == "No Scene BlendShapes":
             print "No blendShape selected to disconnect"
             return
 
@@ -176,7 +167,7 @@ class ToggleBlendShapeConnection_UI:
 
     def reconnectBlendShapeConnections(self, *args, **kwargs):
         blendShape = self.getBlendShapeNodeFromOptionMenu()
-        if not blendShape:
+        if not blendShape or blendShape == "No Scene BlendShapes":
             print "No blendShape selected to reconnect"
             return
 
@@ -205,7 +196,6 @@ class ToggleBlendShapeConnection_UI:
 
 def getSceneBlendShapeNodes():
     """ Gets all the blendShape nodes in the scene
-
     :return: list[string], all the blendShape nodes in the scene, or None of none exist
     """
     return cmds.ls(type="blendShape")
@@ -213,7 +203,6 @@ def getSceneBlendShapeNodes():
 
 def getBlendShapeDataNodes():
     """ Get a list of nodes in the scene that contain blendShape connection info
-
     :return: list[string], name of the blendShape data nodes, or None if none exist
     """
     parentNode = "blendShapeConnection_data"
@@ -224,7 +213,6 @@ def getBlendShapeDataNodes():
 
 def getShapeNode(node):
     """ Get a transform nodes child shape node
-
     :param node: string, name of the transform node to check for a shape node from
     :return: string, shape nodes name, or None
     """
@@ -239,7 +227,6 @@ def getShapeNode(node):
 
 def disconnectNodeConnections(sourceNode, dataNodeName, parent=None, skipNodeTypes=None):
     """ Disconnect a given nodes incoming connections and temporarily store them on another node in the scene
-
     :param sourceNode: string, name of the node to disconnect connections from
     :param dataNodeName: string, name to give the node that will store temporarily store the connections
     :param parent: string, name of the node to parent the dataNode to
@@ -296,7 +283,6 @@ def disconnectNodeConnections(sourceNode, dataNodeName, parent=None, skipNodeTyp
 
 def reconnectNodeConnections(destinationNode, dataNode, ignoreMissingAttributes=False):
     """ Reconnect connections stored on a dataNode back to a blendShape node
-
     :param destinationNode: string, name of the node to reconnect the connections to
     :param dataNode: string, name of the node storing the connections
     :param ignoreMissingAttributes: bool, whether or not missing connections on the destinationNode are ignored
