@@ -72,7 +72,7 @@ class ToggleBlendShapeConnection_UI:
         cmds.columnLayout()
         self.disconnectCorrectives_checkBox = cmds.checkBox(label="Disconnect corrective drivers", value=True)
         self.ignoreMissingAttributesOnConnection_checkBox = cmds.checkBox(
-            label="Ignoring missing attributes on connection", value=False)
+            label="Ignore missing attributes on connection", value=False)
 
         cmds.setParent(parentLayout)
         cmds.rowLayout(nc=2)
