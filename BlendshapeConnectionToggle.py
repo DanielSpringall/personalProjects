@@ -4,7 +4,7 @@ in bypassing the issue of editing a shape in a combination target. Because the c
 stored as a string, this also allows for quickly swapping a driver for a target by disconnecting the connections,
 renaming the target, and then re connecting any connections
 To run:
-import BlendshapeConnectionToggle; blendshapeConnectionToggle.ToggleBlendShapeConnection_UI()
+import BlendshapeConnectionToggle; BlendshapeConnectionToggle.ToggleBlendShapeConnection_UI()
 -------------------------
 MIT License
 Copyright (c) 2018 Daniel Springall
