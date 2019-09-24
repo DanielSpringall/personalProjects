@@ -1,10 +1,10 @@
 """
-blendshapeConnectionToggle is used to disconnect then re-connect incoming connections to a blendshape node. This helps
+BlendshapeConnectionToggle is used to disconnect then re-connect incoming connections to a blendshape node. This helps
 in bypassing the issue of editing a shape in a combination target. Because the connection on the blendshape node is
 stored as a string, this also allows for quickly swapping a driver for a target by disconnecting the connections,
 renaming the target, and then re connecting any connections
 To run:
-import blendshapeConnectionToggle; blendshapeConnectionToggle.ToggleBlendShapeConnection_UI()
+import BlendshapeConnectionToggle; blendshapeConnectionToggle.ToggleBlendShapeConnection_UI()
 -------------------------
 MIT License
 Copyright (c) 2018 Daniel Springall
